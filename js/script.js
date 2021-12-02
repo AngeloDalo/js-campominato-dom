@@ -4,17 +4,17 @@
  * 4) fare tutto al click del button
  */
 
-function difficultGame (choise) {
+ function difficultGame (choise) {
     //console.log (choise)
     if (choise == "Easy") {
-        document.documentElement.style.setProperty('--square-size', '10');
-        return 100; 
+        document.documentElement.style.setProperty('--square-size', '7');
+        return 49; 
     } else if (choise == "Medium") {
         document.documentElement.style.setProperty('--square-size', '9');
         return 81;
     } else if (choise == "Hard") {
-        document.documentElement.style.setProperty('--square-size', '7');
-        return 49;
+        document.documentElement.style.setProperty('--square-size', '10');
+        return 100;
     }
 }
 
@@ -42,10 +42,9 @@ button.addEventListener('click', function () {
         gridsGame.append(grid);
     }
 
-    
     //generazione numeri casuali unici
     let numeriCasuali = [];
-    for (let i=0; i<=166; i++) {
+    for (let i=0; i<=16; i++) {
         numeroCasuale = getRndInteger(0, numberSquare);
         while (numeriCasuali.includes(numeroCasuale)) { //controllo se e incluso in array, e ne genero uno nuovo finche e presente
             numeroCasuale = getRndInteger(0, numberSquare);
@@ -56,10 +55,37 @@ button.addEventListener('click', function () {
     
     const singleSquare = document.querySelectorAll ("div.square");
 
+    //generazione classi none che diventeranno rosse quando perdi
+    for (let i=0; i<=numberSquare; i++) {
+        for (let y=0; y<=numberSquare; y++) {
+            if (i == numeriCasuali[y]) {
+                //console.log (i, numeriCasuali[y]);
+                singleSquare[numeriCasuali[y]].classList.add("square-lose-none");
+            }
+        }
+    }
+    //console.log (singleSquare);
+
+    let conta = 0;
+
     for (i=0; i<=numberSquare; i++) {
+        //se non c'è classe none
         singleSquare[i].addEventListener('click', function () {
             this.classList.add ("square-win-clicked");
+            conta = conta + 1;
+            console.log (conta);
+            if (this.classList.contains ("square-lose-none")) {
+                alert ("HAI PERSO, PUNTI: " + conta);
+                for (let y=0; y<=numberSquare; y++) {
+                    if (singleSquare[y].classList.contains ("square-lose-none")) {
+                            singleSquare[y].classList.remove ("square-lose-none");
+                            singleSquare[y].classList.add ("square-lose-clicked");
+                            container.innerHTML = "";
+                    } 
+                }
+            }
         });
+        //se c'è classe mone i none diventano rossi
     }
 });
 
