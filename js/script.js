@@ -4,20 +4,22 @@
  * 4) fare tutto al click del button
  */
 
- function difficultGame (choise) {
+//in base al valore della difficoltà creare tot caselle
+function difficultGame (choise) {
     //console.log (choise)
     if (choise == "Easy") {
         document.documentElement.style.setProperty('--square-size', '7');
-        return 49; 
+        return 100; 
     } else if (choise == "Medium") {
         document.documentElement.style.setProperty('--square-size', '9');
         return 81;
     } else if (choise == "Hard") {
         document.documentElement.style.setProperty('--square-size', '10');
-        return 100;
+        return 49;
     }
 }
 
+//generazione numeri delle caselle bomba
 function getRndInteger(min, max) {
     return Math.floor(Math.random() * (max - min + 1) ) + min;
 }
@@ -32,9 +34,9 @@ button.addEventListener('click', function () {
     gridsGame.innerHTML = "";
     let container = document.querySelector (".container h1");
     container.innerHTML = "";
-    //console.log (level.value);
     let numberSquare = difficultGame (level.value);
-    //console.log (numberSquare);
+
+    //creazione delle celle im base alla difficoltà
     for (let i=1; i<=numberSquare; i++) {
         const grid = document.createElement("div");
         grid.classList.add("square");
@@ -51,10 +53,8 @@ button.addEventListener('click', function () {
         }
         numeriCasuali.push(numeroCasuale);
     }
-    //console.log (numeriCasuali);
     
     const singleSquare = document.querySelectorAll ("div.square");
-    //console.log (grid);
 
     //generazione classi none che diventeranno rosse quando perdi
     for (let i=0; i<=numberSquare; i++) {
@@ -65,17 +65,18 @@ button.addEventListener('click', function () {
             }
         }
     }
-    console.log (numeriCasuali);
+    //console.log (numeriCasuali);
 
+    //conta del punti 
     let conta = 0;
-    //console.log(grid);
+
     for (i=0; i<numberSquare; i++) {
-        //se non c'è classe none
-        //console.log(singleSquare[i]);
+        //se non c'è classe none colora la cella di blu e aumenta il punteggio
         singleSquare[i].addEventListener('click', function () {
             this.classList.add ("square-win-clicked");
             conta = conta + 1;
-            //console.log (conta);
+            
+            //se presente la classe none togliere la classe ed aggiungere quella rossa
             if (this.classList.contains ("square-lose-none")) {
                 alert ("HAI PERSO, PUNTI: " + (conta-1));
                 for (let y=0; y<=numberSquare; y++) {
@@ -88,6 +89,8 @@ button.addEventListener('click', function () {
                     } 
                 }
             }
+
+            //coso della vittoria
             if (conta == (numberSquare-16)) {
                 alert ("HAI VINTO");
             }
