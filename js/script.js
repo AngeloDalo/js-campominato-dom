@@ -54,6 +54,7 @@ button.addEventListener('click', function () {
     //console.log (numeriCasuali);
     
     const singleSquare = document.querySelectorAll ("div.square");
+    //console.log (grid);
 
     //generazione classi none che diventeranno rosse quando perdi
     for (let i=0; i<=numberSquare; i++) {
@@ -67,9 +68,10 @@ button.addEventListener('click', function () {
     //console.log (singleSquare);
 
     let conta = 0;
-    console.log(grid);
-    for (i=0; i<=numberSquare; i++) {
+    //console.log(grid);
+    for (i=0; i<numberSquare; i++) {
         //se non c'è classe none
+        console.log(singleSquare[i]);
         singleSquare[i].addEventListener('click', function () {
             this.classList.add ("square-win-clicked");
             conta = conta + 1;
@@ -89,21 +91,5 @@ button.addEventListener('click', function () {
         });
     }
 });
-
-// grid.addEventListener('click', function () {
-//     this.classList.add ("square-win-clicked");
-//     conta = conta + 1;
-//     //console.log (conta);
-//     if (this.classList.contains ("square-lose-none")) {
-//             alert ("HAI PERSO, PUNTI: " + (conta-1)); 
-//     }
-//     if (this.classList.contains ("square-lose-none")) {
-//             this.classList.remove ("square-lose-none");
-//             this.classList.add ("square-lose-clicked");
-//             setTimeout(function(){
-//                 window.location.reload(1);
-//             }, 1000);
-//     }
-// });
 
 
