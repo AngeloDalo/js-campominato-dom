@@ -18,6 +18,10 @@ function difficultGame (choise) {
     }
 }
 
+function getRndInteger(min, max) {
+    return Math.floor(Math.random() * (max - min + 1) ) + min;
+}
+
 const button = document.querySelector (".header-dx button");
 const level = document.getElementById ("difficolta");
 
@@ -37,6 +41,18 @@ button.addEventListener('click', function () {
         grid.append (i);
         gridsGame.append(grid);
     }
+
+    
+    //generazione numeri casuali unici
+    let numeriCasuali = [];
+    for (let i=0; i<=166; i++) {
+        numeroCasuale = getRndInteger(0, numberSquare);
+        while (numeriCasuali.includes(numeroCasuale)) { //controllo se e incluso in array, e ne genero uno nuovo finche e presente
+            numeroCasuale = getRndInteger(0, numberSquare);
+        }
+        numeriCasuali.push(numeroCasuale);
+    }
+    //console.log (numeriCasuali);
     
     const singleSquare = document.querySelectorAll ("div.square");
 
