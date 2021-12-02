@@ -75,17 +75,18 @@ button.addEventListener('click', function () {
             conta = conta + 1;
             console.log (conta);
             if (this.classList.contains ("square-lose-none")) {
-                alert ("HAI PERSO, PUNTI: " + conta);
+                alert ("HAI PERSO, PUNTI: " + (conta-1));
                 for (let y=0; y<=numberSquare; y++) {
                     if (singleSquare[y].classList.contains ("square-lose-none")) {
                             singleSquare[y].classList.remove ("square-lose-none");
                             singleSquare[y].classList.add ("square-lose-clicked");
-                            container.innerHTML = "";
+                            setTimeout(function(){
+                                window.location.reload(1);
+                            }, 1000);
                     } 
                 }
             }
         });
-        //se c'è classe mone i none diventano rossi
     }
 });
 
