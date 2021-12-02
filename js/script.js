@@ -44,7 +44,7 @@ button.addEventListener('click', function () {
 
     //generazione numeri casuali unici
     let numeriCasuali = [];
-    for (let i=0; i<=16; i++) {
+    for (let i=0; i<=15; i++) {
         numeroCasuale = getRndInteger(0, numberSquare);
         while (numeriCasuali.includes(numeroCasuale)) { //controllo se e incluso in array, e ne genero uno nuovo finche e presente
             numeroCasuale = getRndInteger(0, numberSquare);
@@ -65,13 +65,13 @@ button.addEventListener('click', function () {
             }
         }
     }
-    //console.log (singleSquare);
+    console.log (numeriCasuali);
 
     let conta = 0;
     //console.log(grid);
     for (i=0; i<numberSquare; i++) {
         //se non c'è classe none
-        console.log(singleSquare[i]);
+        //console.log(singleSquare[i]);
         singleSquare[i].addEventListener('click', function () {
             this.classList.add ("square-win-clicked");
             conta = conta + 1;
@@ -87,6 +87,9 @@ button.addEventListener('click', function () {
                             }, 1000);
                     } 
                 }
+            }
+            if (conta == (numberSquare-16)) {
+                alert ("HAI VINTO");
             }
         });
     }
